@@ -5,7 +5,7 @@ import accounts.Account;
 import java.util.ArrayList;
 import java.util.List;
 
-class Bank {
+public class Bank {
     private static Bank instance;
     private List<Account> accounts;
 
