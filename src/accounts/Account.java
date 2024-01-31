@@ -1,8 +1,5 @@
 package accounts;
 
-import strategies.depositStrategies.DepositStrategy;
-import strategies.withdrawStrategies.WithdrawStrategy;
-
 public interface Account {
     void deposit(double amount);
     boolean withdraw(double amount);

@@ -8,10 +8,10 @@ import strategies.withdrawStrategies.WithdrawStrategy;
 
 public class SavingsAccount implements Account {
     private String name;
-    private String number;
+    private final String number;
     private double balance;
-    private DepositStrategy depositStrategy;
-    private WithdrawStrategy withdrawStrategy;
+    private final DepositStrategy depositStrategy;
+    private final WithdrawStrategy withdrawStrategy;
 
     public SavingsAccount(String name, String number, double initialDeposit) {
         this.name = name;
