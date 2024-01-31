@@ -28,9 +28,14 @@ public class Main {
                     System.out.println("Enter account number: ");
                     number = scanner.nextLine(); // in real world, we should use a random string and validate the account number
                     System.out.println("Enter initial deposit: ");
-                    balance = scanner.nextDouble();
+                    balance = Double.parseDouble(scanner.nextLine());
 
-                    bank.createAccount(type, name, number, balance);
+                    try {
+                        bank.createAccount(type, name, number, balance);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
                 case 2:
                     System.out.println("Display all accounts");
@@ -44,7 +49,7 @@ public class Main {
                     System.out.println("Enter New Name: ");
                     name = scanner.nextLine();
                     System.out.println("Enter New Balance: ");
-                    balance = scanner.nextDouble();
+                    balance = Double.parseDouble(scanner.nextLine());
 
                     bank.updateAccount(number, name, balance);
                     break;
@@ -62,7 +67,7 @@ public class Main {
                     System.out.println("Enter Account Number: ");
                     number = scanner.nextLine();
                     System.out.println("Enter Amount to Deposit: ");
-                    amount = scanner.nextDouble();
+                    amount = Double.parseDouble(scanner.nextLine());
                     bank.deposit(number, amount);
                     break;
                 case 6:
@@ -71,7 +76,7 @@ public class Main {
                     System.out.println("Enter Account Number: ");
                     number = scanner.nextLine();
                     System.out.println("Enter Amount to Withdraw: ");
-                    amount = scanner.nextDouble();
+                    amount = Double.parseDouble(scanner.nextLine());
                     bank.withdraw(number, amount);
                     break;
                 case 7:

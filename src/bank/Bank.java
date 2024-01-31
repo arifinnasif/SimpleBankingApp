@@ -1,6 +1,7 @@
 package bank;
 
 import accounts.Account;
+import exceptions.InsufficientInitialDepositException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Bank {
         return instance;
     }
 
-    public void createAccount(String type, String name, String number, double initialDeposit) {
+    public void createAccount(String type, String name, String number, double initialDeposit) throws InsufficientInitialDepositException {
         Account account = AccountFactory.createAccount(type, name, number, initialDeposit);
         if (account != null) {
             accounts.add(account);
@@ -39,6 +40,8 @@ public class Bank {
         } else {
             for (Account account : accounts) {
                 account.displayAccount();
+                System.out.println();
+
             }
         }
     }
@@ -89,11 +92,7 @@ public class Bank {
     public void withdraw(String number, double amount) {
         Account account = searchAccount(number);
         if (account != null) {
-            if (account.withdraw(amount)) {
-                System.out.println("Withdrawal successful");
-            } else {
-                System.out.println("Withdrawal failed");
-            }
+            account.withdraw(amount);
         } else {
             System.out.println("Account not found");
         }
@@ -109,7 +108,7 @@ public class Bank {
         System.out.println("7. Search Account");
         System.out.println("8. Exit");
 
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 }
 

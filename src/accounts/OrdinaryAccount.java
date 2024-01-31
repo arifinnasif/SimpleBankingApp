@@ -30,7 +30,10 @@ public class OrdinaryAccount implements Account {
     }
 
     public void displayAccount() {
-        System.out.println("Saving Account: " + name + " - " + number + " - Balance: $" + balance);
+        System.out.println("Account name: " + name);
+        System.out.println("Account number: " + number);
+        System.out.println("Account balance: $" + balance);
+        System.out.println("Account type: Ordinary");
     }
 
     @Override

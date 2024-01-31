@@ -1,5 +1,6 @@
 package accounts;
 
+import exceptions.InsufficientInitialDepositException;
 import strategies.depositStrategies.ConstrainedDepositStrategy;
 import strategies.depositStrategies.DepositStrategy;
 import strategies.withdrawStrategies.ConstrainedWithdrawStrategy;
@@ -13,13 +14,19 @@ public class SavingsAccount implements Account{
     private final WithdrawStrategy withdrawStrategy;
     private final DepositStrategy depositStrategy;
 
-    public SavingsAccount(String name, String number, double initialDeposit) {
+    public SavingsAccount(String name, String number, double initialDeposit) throws InsufficientInitialDepositException {
+        double minimumInitialDeposit = 50;
+        double minimumBalance = 1000;
+        double maximumDeposit = 1000;
+        if (initialDeposit < minimumInitialDeposit) {
+            throw new InsufficientInitialDepositException(minimumInitialDeposit);
+        }
         this.name = name;
         this.number = number;
         this.balance = initialDeposit;
-        double minimumBalance = 1000;
+
         this.withdrawStrategy = new ConstrainedWithdrawStrategy(minimumBalance);
-        double maximumDeposit = 1000;
+
         this.depositStrategy = new ConstrainedDepositStrategy(maximumDeposit);
     }
 
@@ -38,6 +45,7 @@ public class SavingsAccount implements Account{
         System.out.println("Account name: " + name);
         System.out.println("Account number: " + number);
         System.out.println("Account balance: $" + balance);
+        System.out.println("Account type: Savings");
     }
 
     @Override
