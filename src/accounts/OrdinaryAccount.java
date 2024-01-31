@@ -1,58 +1,51 @@
 package accounts;
 
-import strategies.depositStrategies.ConstrainedDepositStrategy;
+
 import strategies.depositStrategies.DepositStrategy;
-import strategies.withdrawStrategies.ConstrainedWithdrawStrategy;
+import strategies.depositStrategies.OrdinaryDepositStrategy;
+import strategies.withdrawStrategies.OrdinaryWithdrawStrategy;
 import strategies.withdrawStrategies.WithdrawStrategy;
 
-public class SavingsAccount implements Account{
+public class OrdinaryAccount implements Account {
     private String name;
     private final String number;
     private double balance;
-
-    private final WithdrawStrategy withdrawStrategy;
     private final DepositStrategy depositStrategy;
+    private final WithdrawStrategy withdrawStrategy;
 
-    public SavingsAccount(String name, String number, double initialDeposit) {
+    public OrdinaryAccount(String name, String number, double initialDeposit) {
         this.name = name;
         this.number = number;
         this.balance = initialDeposit;
-        double minimumBalance = 1000;
-        this.withdrawStrategy = new ConstrainedWithdrawStrategy(minimumBalance);
-        double maximumDeposit = 1000;
-        this.depositStrategy = new ConstrainedDepositStrategy(maximumDeposit);
+        this.depositStrategy = new OrdinaryDepositStrategy();
+        this.withdrawStrategy = new OrdinaryWithdrawStrategy();
     }
 
-    @Override
     public void deposit(double amount) {
         balance = depositStrategy.deposit(balance, amount);
     }
 
-    @Override
     public void withdraw(double amount) {
         balance = withdrawStrategy.withdraw(balance, amount);
     }
 
-    @Override
     public void displayAccount() {
-        System.out.println("Account name: " + name);
-        System.out.println("Account number: " + number);
-        System.out.println("Account balance: $" + balance);
+        System.out.println("Saving Account: " + name + " - " + number + " - Balance: $" + balance);
     }
 
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
 
     @Override
     public String getNumber() {
-        return number;
+        return this.number;
     }
 
     @Override
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
 
     @Override

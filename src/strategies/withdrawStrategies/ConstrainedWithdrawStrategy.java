@@ -1,9 +1,13 @@
 package strategies.withdrawStrategies;
 
-public class OrdinaryWithdrawStrategy implements WithdrawStrategy{
+public class ConstrainedWithdrawStrategy implements WithdrawStrategy{
+    private final double minimumBalance;
+    public ConstrainedWithdrawStrategy(double minimumBalance) {
+        this.minimumBalance = minimumBalance;
+    }
     @Override
     public double withdraw(double balance, double amount) {
-        if (amount > balance) {
+        if (balance - amount < minimumBalance) {
             System.out.println("Insufficient funds");
             return balance;
         }

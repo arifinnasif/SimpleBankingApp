@@ -5,7 +5,8 @@ import strategies.depositStrategies.DepositStrategy;
 import strategies.withdrawStrategies.ConstrainedWithdrawStrategy;
 import strategies.withdrawStrategies.WithdrawStrategy;
 
-public class SavingsAccount implements Account{
+public class CurrentAccount implements Account{
+
     private String name;
     private final String number;
     private double balance;
@@ -13,13 +14,13 @@ public class SavingsAccount implements Account{
     private final WithdrawStrategy withdrawStrategy;
     private final DepositStrategy depositStrategy;
 
-    public SavingsAccount(String name, String number, double initialDeposit) {
+    public CurrentAccount(String name, String number, double initialDeposit) {
         this.name = name;
         this.number = number;
         this.balance = initialDeposit;
-        double minimumBalance = 1000;
+        double minimumBalance = 50;
         this.withdrawStrategy = new ConstrainedWithdrawStrategy(minimumBalance);
-        double maximumDeposit = 1000;
+        double maximumDeposit = 10000;
         this.depositStrategy = new ConstrainedDepositStrategy(maximumDeposit);
     }
 
